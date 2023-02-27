@@ -1,5 +1,6 @@
 import sys
 import pygame
+from settings import Settings
 
 
 class AntColony:
@@ -8,7 +9,10 @@ class AntColony:
     def __init__(self):
         """Program initialization"""
         pygame.init()
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.settings = Settings()
+
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Ant Colony")
 
     def run_program(self):
@@ -18,7 +22,9 @@ class AntColony:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-            self.screen.fill((230, 230, 230))
+            self.screen.fill(self.settings.bg_color)
+
+            # Display last refresh screen
             pygame.display.flip()
 
 
