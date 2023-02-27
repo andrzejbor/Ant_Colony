@@ -41,11 +41,28 @@ class AntColony:
         """Creates all cities"""
         for city_number in range(self.settings.city_number):
             city = City(self)
-            city.rect.x = randrange(self.settings.screen_width - 20)
-            city.rect.y = randrange(self.settings.screen_height - 20)
+            while True:
+                city.rect.x = randrange(self.settings.screen_border,
+                                        self.settings.screen_width - self.settings.screen_border)
+                city.rect.y = randrange(self.settings.screen_border,
+                                        self.settings.screen_height - self.settings.screen_border)
+                if self._check_is_city_near(city):
+                    # Have to random new position
+                    pass
+                else:
+                    break
+
             self.cities.add(city)
 
             print(f"Nowe miasto x = {city.rect.x}, y = {city.rect.y}")
+
+    def _check_is_city_near(self, new_city):
+        """Check is any other city inside city border"""
+        for city in self.cities:
+            if abs(city.rect.x - new_city.rect.x) < self.settings.city_border or\
+                    abs(city.rect.y - new_city.rect.y) < self.settings.city_border:
+                return True
+        return False
 
     def _update_screen(self):
         """Refresh object on screen"""
