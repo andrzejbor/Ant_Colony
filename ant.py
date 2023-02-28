@@ -1,3 +1,4 @@
+from random import randrange
 import pygame
 from pygame.sprite import Sprite
 
@@ -18,7 +19,7 @@ class Ant(Sprite):
 
     def go_to_next_city(self):
         """Move to next city"""
-        if len(self.city_to_visit) > 0:
+        if len(self.city_to_visit) > 1:
             self.visited_cities.add(self.current_position)
             self.city_to_visit.remove(self.current_position)
             self.current_position = self._choose_random_city()
@@ -26,11 +27,14 @@ class Ant(Sprite):
             last_road.change_color()
             self.distance_traveled += last_road.road_length
         else:
+            self.visited_cities.add(self.current_position)
+            self.current_position = self.city_to_visit.sprites()[0]
+            self.visited_cities.add(self.current_position)
             self.journey_compleat = True
 
     def _choose_random_city(self):
         """Draw random city from not visited"""
-        return self.city_to_visit[range(len(self.cities))]
+        return self.city_to_visit.sprites()[randrange(len(self.city_to_visit.sprites()))]
 
     def _find_last_road(self):
         """Find last traveled road"""

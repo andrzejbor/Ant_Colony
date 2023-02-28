@@ -5,3 +5,4 @@ class ProgStats:
         self.best_way_length = 0
         self.best_way = []
         self.start_city = None
+        self.iteration_complete = False

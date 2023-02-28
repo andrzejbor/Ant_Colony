@@ -27,6 +27,7 @@ class AntColony:
 
         self._create_cities()
         self._create_roads()
+        self._choose_start_city()
         self._create_ants()
 
     def run_program(self):
@@ -34,6 +35,10 @@ class AntColony:
         while True:
             self._check_events()
             self.screen.fill(self.settings.bg_color)
+            if not self.stats.iteration_complete:
+                self._move_ants()
+            else:
+                print("Iteration complete")
             self._update_screen()
 
     def _check_events(self):
@@ -88,13 +93,21 @@ class AntColony:
 
     def _choose_start_city(self):
         """Draw random city as start"""
-        self.stats.start_city = self.cities[range(len(self.cities))]
+        self.stats.start_city = self.cities.sprites()[randrange(len(self.cities.sprites()))]
 
     def _create_ants(self):
+        """Create ants"""
         for ant_number in range(self.settings.ant_limit):
             ant = Ant(self)
             self.ants.add(ant)
-        print(len(self.ants))
+
+    def _move_ants(self):
+        """If journey not completed - move ants"""
+        for ant in self.ants:
+            if not ant.journey_compleat:
+                ant.go_to_next_city()
+            else:
+                self.stats.iteration_complete = True
 
     def _update_screen(self):
         """Refresh object on screen"""
