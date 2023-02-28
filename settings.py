@@ -15,3 +15,6 @@ class Settings:
         self.city_color = (0, 0, 0)
         self.city_size = 20
         self.city_border = 100
+
+        # Road settings
+        self.road_color = (250, 0, 0)

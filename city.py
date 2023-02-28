@@ -7,6 +7,7 @@ class City(Sprite):
 
     def __init__(self, ac_prog):
         """Initialization city and define it position"""
+
         super().__init__()
         self.screen = ac_prog.screen
         self.settings = ac_prog.settings

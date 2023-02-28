@@ -3,6 +3,7 @@ import pygame
 from random import randrange
 from settings import Settings
 from city import City
+from road import Road
 
 
 class AntColony:
@@ -18,8 +19,10 @@ class AntColony:
         pygame.display.set_caption("Ant Colony")
 
         self.cities = pygame.sprite.Group()
+        self.roads = pygame.sprite.Group()
 
         self._create_cities()
+        self._create_roads()
 
     def run_program(self):
         """Run main loop"""
@@ -54,20 +57,38 @@ class AntColony:
 
             self.cities.add(city)
 
-            print(f"Nowe miasto x = {city.rect.x}, y = {city.rect.y}")
-
     def _check_is_city_near(self, new_city):
         """Check is any other city inside city border"""
         for city in self.cities:
-            if abs(city.rect.x - new_city.rect.x) < self.settings.city_border or\
+            if abs(city.rect.x - new_city.rect.x) < self.settings.city_border or \
                     abs(city.rect.y - new_city.rect.y) < self.settings.city_border:
                 return True
         return False
+
+    def _create_roads(self):
+        """Create roads between all cities"""
+        cities_copy = self.cities.copy()
+        for city in self.cities:
+            for city_copy in cities_copy:
+                if self._check_cities_position(city, city_copy):
+                    continue
+                else:
+                    road = Road(self, city, city_copy)
+                    self.roads.add(road)
+            cities_copy.remove(city)
+
+    def _check_cities_position(self, city_1, city_2):
+        """Check if two cities is in the same position"""
+        return city_1.rect.center == city_2.rect.center
 
     def _update_screen(self):
         """Refresh object on screen"""
         # Refresh screen in every iteration
         self.screen.fill(self.settings.bg_color)
+
+        # Draw roads
+        for road in self.roads:
+            road.draw_road()
 
         # Draw cities
         for city in self.cities:
