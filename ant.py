@@ -10,7 +10,7 @@ class Ant(Sprite):
         super().__init__()
         self.screen = ac_prog.screen
         self.settings = ac_prog.settings
-        self.city_to_visit = ac_prog.cities
+        self.city_to_visit = ac_prog.cities.copy()
         self.roads = ac_prog.roads
         self.current_position = ac_prog.stats.start_city
         self.visited_cities = pygame.sprite.Group()
@@ -27,6 +27,8 @@ class Ant(Sprite):
             last_road.change_color()
             self.distance_traveled += last_road.road_length
         else:
+            # TODO have to change to - move to last city and move to start. After that loop will be complete
+            # Move to start city
             self.visited_cities.add(self.current_position)
             self.current_position = self.city_to_visit.sprites()[0]
             self.visited_cities.add(self.current_position)

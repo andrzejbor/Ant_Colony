@@ -1,4 +1,6 @@
 import sys
+import time
+
 import pygame
 from random import randrange
 from settings import Settings
@@ -37,8 +39,9 @@ class AntColony:
             self.screen.fill(self.settings.bg_color)
             if not self.stats.iteration_complete:
                 self._move_ants()
+                time.sleep(1)
             else:
-                print("Iteration complete")
+                pass
             self._update_screen()
 
     def _check_events(self):
