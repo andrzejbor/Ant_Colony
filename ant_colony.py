@@ -4,6 +4,8 @@ from random import randrange
 from settings import Settings
 from city import City
 from road import Road
+from prog_stats import ProgStats
+from ant import Ant
 
 
 class AntColony:
@@ -13,6 +15,7 @@ class AntColony:
         """Program initialization"""
         pygame.init()
         self.settings = Settings()
+        self.stats = ProgStats()
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
@@ -20,9 +23,11 @@ class AntColony:
 
         self.cities = pygame.sprite.Group()
         self.roads = pygame.sprite.Group()
+        self.ants = pygame.sprite.Group()
 
         self._create_cities()
         self._create_roads()
+        self._create_ants()
 
     def run_program(self):
         """Run main loop"""
@@ -81,9 +86,15 @@ class AntColony:
         """Check if two cities is in the same position"""
         return city_1.rect.center == city_2.rect.center
 
-    def choose_start_city(self):
+    def _choose_start_city(self):
         """Draw random city as start"""
-        pass
+        self.stats.start_city = self.cities[range(len(self.cities))]
+
+    def _create_ants(self):
+        for ant_number in range(self.settings.ant_limit):
+            ant = Ant(self)
+            self.ants.add(ant)
+        print(len(self.ants))
 
     def _update_screen(self):
         """Refresh object on screen"""

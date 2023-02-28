@@ -21,6 +21,10 @@ class Road(Sprite):
         return int(math.sqrt(math.pow(abs(pos_1[0] - pos_2[0]), 2)
                              + math.pow(abs(pos_1[1] - pos_2[1]), 2)))
 
+    def change_color(self):
+        """Change road color to blue"""
+        self.color = (0, 0, 250)
+
     def draw_road(self):
         """Display road on the screen"""
 
