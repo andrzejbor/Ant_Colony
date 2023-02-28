@@ -18,3 +18,6 @@ class Settings:
 
         # Road settings
         self.road_color = (250, 0, 0)
+
+        # Ant settings
+        self.ant_limit = 5

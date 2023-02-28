@@ -81,6 +81,10 @@ class AntColony:
         """Check if two cities is in the same position"""
         return city_1.rect.center == city_2.rect.center
 
+    def choose_start_city(self):
+        """Draw random city as start"""
+        pass
+
     def _update_screen(self):
         """Refresh object on screen"""
         # Refresh screen in every iteration
