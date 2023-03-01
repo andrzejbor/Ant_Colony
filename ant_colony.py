@@ -130,9 +130,11 @@ class AntColony:
                     ant.journey_compleat = False
                     return
             self.stats.iteration_complete = False
+            self._search_for_best_way()
             self._reset_ants_for_next_iteration()
 
     def _reset_ants_for_next_iteration(self):
+        """Reset ants before next iteration"""
         self.ants.empty()
         self._create_ants()
 
@@ -142,6 +144,16 @@ class AntColony:
             time.sleep(self.settings.show_traveled_roads_delay)
         else:
             time.sleep(self.settings.ant_move_delay)
+
+    def _search_for_best_way(self):
+        """Check all traveled way in this iteration and save best one"""
+        if self.stats.best_way_length == 0:
+            self.stats.best_way_length = self.ants.sprites()[0].distance_traveled
+            self.stats.best_way = self.ants.sprites()[0].visited_cities
+        for ant in self.ants:
+            if ant.distance_traveled < self.stats.best_way_length:
+                self.stats.best_way_length = ant.distance_traveled
+                self.stats.best_way = ant.visited_cities
 
     def _update_screen(self):
         """Refresh object on screen"""
