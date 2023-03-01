@@ -131,6 +131,9 @@ class AntColony:
                 if ant.journey_compleat:
                     ant.color_traveled_roads()
                     ant.journey_compleat = False
+                    self.stats.current_ant_result = ant.distance_traveled
+                    self.stats.current_ant_number = ant.ant_number
+                    self.sr.prep_ant_result()
                     return
             self.stats.iteration_complete = False
             self._search_for_best_way()

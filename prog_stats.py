@@ -6,3 +6,7 @@ class ProgStats:
         self.best_way = []
         self.start_city = None
         self.iteration_complete = False
+
+        # Current ant results
+        self.current_ant_result = 0
+        self.current_ant_number = 0

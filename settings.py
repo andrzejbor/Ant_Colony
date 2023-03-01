@@ -27,5 +27,5 @@ class Settings:
         self.ant_road_width = 4
 
         # Time settings
-        self.ant_move_delay = 1
-        self.show_traveled_roads_delay = 2
+        self.ant_move_delay = 0.5
+        self.show_traveled_roads_delay = 1.5
