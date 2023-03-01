@@ -15,9 +15,11 @@ class Settings:
         self.city_color = (0, 0, 0)
         self.city_size = 20
         self.city_border = 100
+        self.start_city_color = (250, 250, 0)
 
         # Road settings
         self.road_color = (250, 0, 0)
 
         # Ant settings
         self.ant_limit = 1
+        self.ant_road_color = (0, 0, 250)

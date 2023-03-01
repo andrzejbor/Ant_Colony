@@ -23,7 +23,11 @@ class Road(Sprite):
 
     def change_color(self):
         """Change road color to blue"""
-        self.color = (0, 0, 250)
+        self.color = self.settings.ant_road_color
+
+    def back_to_initial_color(self):
+        """Change road color to initial"""
+        self.color = self.settings.road_color
 
     def draw_road(self):
         """Display road on the screen"""

@@ -17,6 +17,9 @@ class City(Sprite):
         self.rect = pygame.Rect(0, 0, self.settings.city_size,
                                 self.settings.city_size)
 
+    def change_start_city_color(self):
+        self.color = self.settings.start_city_color
+
     def draw_city(self):
         """Display city on screen"""
 

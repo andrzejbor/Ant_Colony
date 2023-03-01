@@ -96,7 +96,10 @@ class AntColony:
 
     def _choose_start_city(self):
         """Draw random city as start"""
-        self.stats.start_city = self.cities.sprites()[randrange(len(self.cities.sprites()))]
+        random_index = randrange(len(self.cities.sprites()))
+        self.stats.start_city = self.cities.sprites()[random_index]
+        self.cities.sprites()[random_index].change_start_city_color()
+
 
     def _create_ants(self):
         """Create ants"""
