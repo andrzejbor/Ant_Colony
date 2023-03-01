@@ -8,6 +8,7 @@ from city import City
 from road import Road
 from prog_stats import ProgStats
 from ant import Ant
+from show_results import ShowResults
 
 
 class AntColony:
@@ -22,6 +23,8 @@ class AntColony:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Ant Colony")
+
+        self.sr = ShowResults(self)
 
         self.cities = pygame.sprite.Group()
         self.roads = pygame.sprite.Group()
@@ -154,6 +157,7 @@ class AntColony:
             if ant.distance_traveled < self.stats.best_way_length:
                 self.stats.best_way_length = ant.distance_traveled
                 self.stats.best_way = ant.visited_cities
+        self.sr.prep_best_result()
 
     def _update_screen(self):
         """Refresh object on screen"""
@@ -167,6 +171,9 @@ class AntColony:
         # Draw cities
         for city in self.cities:
             city.draw_city()
+
+        # Show best result
+        self.sr.show_result()
 
         # Display last refresh screen
         pygame.display.flip()
