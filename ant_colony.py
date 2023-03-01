@@ -37,12 +37,10 @@ class AntColony:
         while True:
             self._check_events()
             self.screen.fill(self.settings.bg_color)
-            if not self.stats.iteration_complete:
-                self._move_ants()
-                time.sleep(1)
-            else:
-                pass
+            self._refresh_roads()
+            self._update_ants()
             self._update_screen()
+            self._program_sleep()
 
     def _check_events(self):
         """Reaction for mouse and keyboard events"""
@@ -100,11 +98,10 @@ class AntColony:
         self.stats.start_city = self.cities.sprites()[random_index]
         self.cities.sprites()[random_index].change_start_city_color()
 
-
     def _create_ants(self):
         """Create ants"""
         for ant_number in range(self.settings.ant_limit):
-            ant = Ant(self)
+            ant = Ant(self, ant_number)
             self.ants.add(ant)
 
     def _move_ants(self):
@@ -114,6 +111,37 @@ class AntColony:
                 ant.go_to_next_city()
             else:
                 self.stats.iteration_complete = True
+
+    def _refresh_roads(self):
+        """refresh roads ti initial color"""
+        for road in self.roads:
+            road.back_to_initial_road_settings()
+
+    def _update_ants(self):
+        """Managing ants. Move ants as long as iteration is not compleat.
+        Show each ant traveled road after iteration end, then reset iteration"""
+
+        if not self.stats.iteration_complete:
+            self._move_ants()
+        else:
+            for ant in self.ants:
+                if ant.journey_compleat:
+                    ant.color_traveled_roads()
+                    ant.journey_compleat = False
+                    return
+            self.stats.iteration_complete = False
+            self._reset_ants_for_next_iteration()
+
+    def _reset_ants_for_next_iteration(self):
+        self.ants.empty()
+        self._create_ants()
+
+    def _program_sleep(self):
+        """Manage pause time for better showing result"""
+        if self.stats.iteration_complete:
+            time.sleep(self.settings.show_traveled_roads_delay)
+        else:
+            time.sleep(self.settings.ant_move_delay)
 
     def _update_screen(self):
         """Refresh object on screen"""

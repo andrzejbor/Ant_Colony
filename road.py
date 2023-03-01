@@ -12,6 +12,7 @@ class Road(Sprite):
         self.screen = ac_prog.screen
         self.settings = ac_prog.settings
         self.color = self.settings.road_color
+        self.width = self.settings.road_width
         self.pos_1 = city_1.rect.center
         self.pos_2 = city_2.rect.center
         self.road_length = self._calculate_road_length(self.pos_1, self.pos_2)
@@ -21,15 +22,17 @@ class Road(Sprite):
         return int(math.sqrt(math.pow(abs(pos_1[0] - pos_2[0]), 2)
                              + math.pow(abs(pos_1[1] - pos_2[1]), 2)))
 
-    def change_color(self):
+    def mark_traveled_road(self):
         """Change road color to blue"""
         self.color = self.settings.ant_road_color
+        self.width = self.settings.ant_road_width
 
-    def back_to_initial_color(self):
+    def back_to_initial_road_settings(self):
         """Change road color to initial"""
         self.color = self.settings.road_color
+        self.width = self.settings.road_width
 
     def draw_road(self):
         """Display road on the screen"""
 
-        pygame.draw.line(self.screen, self.color, self.pos_1, self.pos_2)
+        pygame.draw.line(self.screen, self.color, self.pos_1, self.pos_2, self.width)

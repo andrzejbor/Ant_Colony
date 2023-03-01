@@ -19,7 +19,13 @@ class Settings:
 
         # Road settings
         self.road_color = (250, 0, 0)
+        self.road_width = 2
 
         # Ant settings
-        self.ant_limit = 1
+        self.ant_limit = 2
         self.ant_road_color = (0, 0, 250)
+        self.ant_road_width = 4
+
+        # Time settings
+        self.ant_move_delay = 1
+        self.show_traveled_roads_delay = 2
