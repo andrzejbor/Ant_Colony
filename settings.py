@@ -1,3 +1,6 @@
+import pygame.font
+
+
 class Settings:
     """Class for storage all settings"""
 
@@ -34,3 +37,11 @@ class Settings:
         # Menu settings
         self.menu_width = 200
         self.menu_color = (0, 0, 0)
+
+        # Button settings
+        self.button_width = 150
+        self.button_high = 50
+        self.button_color = (0, 255, 0)
+        self.button_text_color = (255, 255, 255)
+
+
