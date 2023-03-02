@@ -46,8 +46,7 @@ class AntColony:
         while True:
             self._check_events()
             self.screen.fill(self.settings.bg_color)
-            if self.prog_stat.initial_state.is_active:
-                # Show welcome message
+            if self.prog_stat.initial_state.is_active or self.prog_stat.pause_state.is_active:
                 pass
             else:
                 self._refresh_roads()
@@ -72,6 +71,8 @@ class AntColony:
         """Check if one of buttons was clic"""
         if self.prog_menu.start_button.rect.collidepoint(mouse_pos):
             self.bt_events.click_start_button()
+        if self.prog_menu.restart_button.rect.collidepoint(mouse_pos):
+            self.bt_events.click_restart_button(self)
 
     def _create_cities(self):
         """Creates all cities"""
@@ -204,13 +205,11 @@ class AntColony:
         self.screen.fill(self.settings.bg_color)
 
         if not self.prog_stat.initial_state.is_active:
-            # Draw roads
+            # Draw roads, cities and best result
             for road in self.roads:
                 road.draw_road()
-            # Draw cities
             for city in self.cities:
                 city.draw_city()
-            # Show best result
             self.sr.show_result()
 
         # Show menu

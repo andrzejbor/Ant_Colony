@@ -11,3 +11,10 @@ class ProgStats:
         # Current ant results
         self.current_ant_result = 0
         self.current_ant_number = 0
+
+    def restart_stats(self):
+        """Reset stats"""
+        self.best_way_length = 0
+        self.best_way = []
+        self.start_city = None
+        self.iteration_complete = False

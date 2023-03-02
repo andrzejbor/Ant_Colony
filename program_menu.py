@@ -25,7 +25,14 @@ class ProgramMenu:
                               self.settings.start_button_number)
         self.start_button.draw_button()
 
+    def draw_restart_button(self):
+        """Draw restart button"""
+        self.restart_button = Button(self.ac_prog, self.settings.restart_button_text,
+                                     self.settings.restart_button_number)
+        self.restart_button.draw_button()
+
     def display_menu(self):
         """Display all manu element on screen"""
         self.draw_menu_rect()
         self.draw_start_button()
+        self.draw_restart_button()

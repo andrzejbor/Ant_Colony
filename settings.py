@@ -50,4 +50,8 @@ class Settings:
         self.start_button_number = 0
         self.start_button_text = "Start"
 
+        # Restart algorithm button
+        self.restart_button_number = 1
+        self.restart_button_text = "Restart"
+
 
