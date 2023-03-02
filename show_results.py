@@ -27,7 +27,7 @@ class ShowResults:
                                              self.text_color, self.settings.bg_color)
         # Display best result in left top of screen
         self.result_rect = self.result_image.get_rect()
-        self.result_rect.left = self.settings.screen_width // 8
+        self.result_rect.left = self.settings.menu_width + 10
         self.result_rect.top = self.screen_rect.top + 10
 
     def prep_ant_result(self):
@@ -36,7 +36,7 @@ class ShowResults:
                       + "{:,}".format(self.stats.current_ant_result)
         self.ant_res_image = self.font.render(ant_res_str, True,
                                               self.text_color, self.settings.bg_color)
-        # Display best result in right top of screen
+        # Display ant result in right top of screen
         self.ant_res_rect = self.ant_res_image.get_rect()
         self.ant_res_rect.right = self.screen_rect.right - self.settings.screen_width // 8
         self.ant_res_rect.top = self.screen_rect.top + 10

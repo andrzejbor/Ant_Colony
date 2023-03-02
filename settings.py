@@ -9,6 +9,7 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (230, 230, 230)
         self.screen_border = 100
+        self.screen_left_border = 200
 
         # City settings
         self.city_number = 5
@@ -22,10 +23,14 @@ class Settings:
         self.road_width = 2
 
         # Ant settings
-        self.ant_limit = 2
+        self.ant_limit = 5
         self.ant_road_color = (0, 0, 250)
         self.ant_road_width = 4
 
         # Time settings
         self.ant_move_delay = 0.5
         self.show_traveled_roads_delay = 1.5
+
+        # Menu settings
+        self.menu_width = 200
+        self.menu_color = (0, 0, 0)

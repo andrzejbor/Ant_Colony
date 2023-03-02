@@ -1,6 +1,5 @@
 import sys
 import time
-
 import pygame
 from random import randrange
 from settings import Settings
@@ -10,6 +9,7 @@ from prog_stats import ProgStats
 from ant import Ant
 from show_results import ShowResults
 from state_machine import ProgramState
+from program_menu import ProgramMenu
 
 
 class AntColony:
@@ -26,6 +26,7 @@ class AntColony:
         pygame.display.set_caption("Ant Colony")
 
         self.sr = ShowResults(self)
+        self.prog_menu = ProgramMenu(self)
 
         self.prog_stat = ProgramState()
 
@@ -62,7 +63,7 @@ class AntColony:
         for city_number in range(self.settings.city_number):
             city = City(self)
             while True:
-                city.rect.x = randrange(self.settings.screen_border,
+                city.rect.x = randrange(self.settings.screen_left_border,
                                         self.settings.screen_width - self.settings.screen_border)
                 city.rect.y = randrange(self.settings.screen_border,
                                         self.settings.screen_height - self.settings.screen_border)
@@ -187,6 +188,9 @@ class AntColony:
 
         # Show best result
         self.sr.show_result()
+
+        # Show menu
+        self.prog_menu.display_menu()
 
         # Display last refresh screen
         pygame.display.flip()
