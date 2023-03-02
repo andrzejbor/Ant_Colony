@@ -33,6 +33,13 @@ class Settings:
         # Time settings
         self.ant_move_delay = 0.5
         self.show_traveled_roads_delay = 1.5
+        self.ant_move_delay_long = 0.5
+        self.show_traveled_roads_delay_long = 1.5
+        self.ant_move_delay_short = 0.1
+        self.show_traveled_roads_delay_short = 0.3
+
+        # Program end settings
+        self.iteration_without_better_result_limit = 5
 
         # Menu settings
         self.menu_width = 200
@@ -54,4 +61,10 @@ class Settings:
         self.restart_button_number = 1
         self.restart_button_text = "Restart"
 
+        # Quick version button
+        self.speedup_button_number = 2
+        self.speedup_button_text = "Quick"
 
+        # Slow version button
+        self.slowdown_button_number = 3
+        self.slowdown_button_text = "Slow"

@@ -4,6 +4,7 @@ class ButtonEvents:
     def __init__(self, ac_prog):
         self.ac_prog = ac_prog
         self.prog_stat = self.ac_prog.prog_stat
+        self.settings = self.ac_prog.settings
 
     def click_start_button(self):
         """Start program if no started"""
@@ -35,3 +36,13 @@ class ButtonEvents:
                 self.prog_stat.from_ant_to_pause()
             else:
                 self.prog_stat.from_show_to_pause()
+
+    def click_speedup_button(self):
+        """Change delay for shorter version"""
+        self.settings.ant_move_delay = self.settings.ant_move_delay_short
+        self.settings.show_traveled_roads_delay = self.settings.show_traveled_roads_delay_short
+
+    def click_slowdown_button(self):
+        """Change delay for long version"""
+        self.settings.ant_move_delay = self.settings.ant_move_delay_long
+        self.settings.show_traveled_roads_delay = self.settings.show_traveled_roads_delay_long

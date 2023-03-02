@@ -71,8 +71,12 @@ class AntColony:
         """Check if one of buttons was clic"""
         if self.prog_menu.start_button.rect.collidepoint(mouse_pos):
             self.bt_events.click_start_button()
-        if self.prog_menu.restart_button.rect.collidepoint(mouse_pos):
+        elif self.prog_menu.restart_button.rect.collidepoint(mouse_pos):
             self.bt_events.click_restart_button(self)
+        elif self.prog_menu.speedup_button.rect.collidepoint(mouse_pos):
+            self.bt_events.click_speedup_button()
+        elif self.prog_menu.slowdown_button.rect.collidepoint(mouse_pos):
+            self.bt_events.click_slowdown_button()
 
     def _create_cities(self):
         """Creates all cities"""
