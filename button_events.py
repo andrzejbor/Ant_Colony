@@ -29,6 +29,7 @@ class ButtonEvents:
             ac_prog._create_ants()
 
             ac_prog.stats.restart_stats()
+            ac_prog.sr.prep_best_result()
 
             if self.prog_stat.current_state.id == "ant_move_state":
                 self.prog_stat.from_ant_to_pause()
