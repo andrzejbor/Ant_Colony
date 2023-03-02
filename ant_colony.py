@@ -10,6 +10,7 @@ from ant import Ant
 from show_results import ShowResults
 from state_machine import ProgramState
 from program_menu import ProgramMenu
+from button_events import ButtonEvents
 
 
 class AntColony:
@@ -29,6 +30,7 @@ class AntColony:
         self.prog_menu = ProgramMenu(self)
 
         self.prog_stat = ProgramState()
+        self.bt_events = ButtonEvents(self)
 
         self.cities = pygame.sprite.Group()
         self.roads = pygame.sprite.Group()
@@ -44,8 +46,13 @@ class AntColony:
         while True:
             self._check_events()
             self.screen.fill(self.settings.bg_color)
-            self._refresh_roads()
-            self._update_ants()
+            if self.prog_stat.initial_state.is_active:
+                # Show welcome message
+                pass
+            else:
+                self._refresh_roads()
+                self._update_ants()
+
             self._update_screen()
             self._program_sleep()
 
@@ -57,6 +64,14 @@ class AntColony:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_buttons(mouse_pos)
+
+    def _check_buttons(self, mouse_pos):
+        """Check if one of buttons was clic"""
+        if self.prog_menu.start_button.rect.collidepoint(mouse_pos):
+            self.bt_events.click_start_button()
 
     def _create_cities(self):
         """Creates all cities"""
@@ -84,7 +99,6 @@ class AntColony:
                     break
             if len(self.cities) == self.settings.city_number:
                 break
-
 
     def _check_is_city_near(self, new_city):
         """Check is any other city inside city border"""
@@ -189,16 +203,15 @@ class AntColony:
         # Refresh screen in every iteration
         self.screen.fill(self.settings.bg_color)
 
-        # Draw roads
-        for road in self.roads:
-            road.draw_road()
-
-        # Draw cities
-        for city in self.cities:
-            city.draw_city()
-
-        # Show best result
-        self.sr.show_result()
+        if not self.prog_stat.initial_state.is_active:
+            # Draw roads
+            for road in self.roads:
+                road.draw_road()
+            # Draw cities
+            for city in self.cities:
+                city.draw_city()
+            # Show best result
+            self.sr.show_result()
 
         # Show menu
         self.prog_menu.display_menu()
