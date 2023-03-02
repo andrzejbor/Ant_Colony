@@ -46,12 +46,7 @@ class AntColony:
         while True:
             self._check_events()
             self.screen.fill(self.settings.bg_color)
-            if self.prog_stat.initial_state.is_active or self.prog_stat.pause_state.is_active:
-                pass
-            else:
-                self._refresh_roads()
-                self._update_ants()
-
+            self._update_roads_and_ants()
             self._update_screen()
             self._program_sleep()
 
@@ -177,8 +172,11 @@ class AntColony:
                     return
             self.stats.iteration_complete = False
             self._search_for_best_way()
-            self._reset_ants_for_next_iteration()
-            self.prog_stat.switch_to_ant_move()
+            if self._check_end_program_condition():
+                pass
+            else:
+                self._reset_ants_for_next_iteration()
+                self.prog_stat.switch_to_ant_move()
 
     def _reset_ants_for_next_iteration(self):
         """Reset ants before next iteration"""
@@ -194,14 +192,44 @@ class AntColony:
 
     def _search_for_best_way(self):
         """Check all traveled way in this iteration and save best one"""
+        better_result_found = False
         if self.stats.best_way_length == 0:
             self.stats.best_way_length = self.ants.sprites()[0].distance_traveled
-            self.stats.best_way = self.ants.sprites()[0].visited_cities
+            self.stats.best_way = self.ants.sprites()[0].traveled_roads
         for ant in self.ants:
             if ant.distance_traveled < self.stats.best_way_length:
                 self.stats.best_way_length = ant.distance_traveled
-                self.stats.best_way = ant.visited_cities
+                self.stats.best_way = ant.traveled_roads
+                better_result_found = True
         self.sr.prep_best_result()
+        if better_result_found:
+            self.stats.iteration_without_better_result = 0
+        else:
+            self.stats.iteration_without_better_result += 1
+
+    def _check_end_program_condition(self):
+        """Check if end program condition has been met"""
+        if self.stats.iteration_without_better_result >= self.settings.iteration_without_better_result_limit:
+            self.prog_stat.switch_to_end()
+            return True
+        return False
+
+    def _update_roads_and_ants(self):
+        """Update, or not, roads and ants depending on state"""
+        if self.prog_stat.initial_state.is_active or self.prog_stat.pause_state.is_active:
+            pass
+        elif self.prog_stat.ant_move_state.is_active or self.prog_stat.show_results_state.is_active:
+            self._refresh_roads()
+            self._update_ants()
+        elif self.prog_stat.end_program_state.is_active:
+            self._refresh_roads()
+            self._show_best_way()
+
+    def _show_best_way(self):
+        """Show best founded way"""
+        best_ant = Ant(self, 1)
+        best_ant.traveled_roads = self.stats.best_way
+        best_ant.color_traveled_roads()
 
     def _update_screen(self):
         """Refresh object on screen"""

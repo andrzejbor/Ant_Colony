@@ -39,7 +39,7 @@ class Settings:
         self.show_traveled_roads_delay_short = 0.3
 
         # Program end settings
-        self.iteration_without_better_result_limit = 5
+        self.iteration_without_better_result_limit = 2
 
         # Menu settings
         self.menu_width = 200
