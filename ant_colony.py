@@ -157,9 +157,9 @@ class AntColony:
     def _program_sleep(self):
         """Manage pause time for better showing result"""
         if self.prog_stat.ant_move_state.is_active:
-            time.sleep(self.settings.show_traveled_roads_delay)
-        elif self.prog_stat.show_results_state.is_active:
             time.sleep(self.settings.ant_move_delay)
+        elif self.prog_stat.show_results_state.is_active:
+            time.sleep(self.settings.show_traveled_roads_delay)
 
     def _search_for_best_way(self):
         """Check all traveled way in this iteration and save best one"""

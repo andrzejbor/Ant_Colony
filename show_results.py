@@ -44,5 +44,5 @@ class ShowResults:
     def show_result(self):
         """Show best result and ant result"""
         self.screen.blit(self.result_image, self.result_rect)
-        if self.stats.iteration_complete:
+        if self.ac_prog.prog_stat.show_results_state.is_active:
             self.screen.blit(self.ant_res_image, self.ant_res_rect)
