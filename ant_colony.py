@@ -9,6 +9,7 @@ from road import Road
 from prog_stats import ProgStats
 from ant import Ant
 from show_results import ShowResults
+from state_machine import ProgramState
 
 
 class AntColony:
@@ -25,6 +26,8 @@ class AntColony:
         pygame.display.set_caption("Ant Colony")
 
         self.sr = ShowResults(self)
+
+        self.prog_stat = ProgramState()
 
         self.cities = pygame.sprite.Group()
         self.roads = pygame.sprite.Group()
@@ -109,6 +112,7 @@ class AntColony:
 
     def _move_ants(self):
         """If journey not completed - move ants"""
+        self.stats.ant_moving_phase = True
         for ant in self.ants:
             if not ant.journey_compleat:
                 ant.go_to_next_city()
@@ -127,6 +131,11 @@ class AntColony:
         if not self.stats.iteration_complete:
             self._move_ants()
         else:
+            # Check program state
+            if self.prog_stat.ant_move_state.is_active:
+                self.prog_stat.switch_to_show_result()
+
+            # Show each ant result
             for ant in self.ants:
                 if ant.journey_compleat:
                     ant.color_traveled_roads()
@@ -138,6 +147,7 @@ class AntColony:
             self.stats.iteration_complete = False
             self._search_for_best_way()
             self._reset_ants_for_next_iteration()
+            self.prog_stat.switch_to_ant_move()
 
     def _reset_ants_for_next_iteration(self):
         """Reset ants before next iteration"""
@@ -146,9 +156,9 @@ class AntColony:
 
     def _program_sleep(self):
         """Manage pause time for better showing result"""
-        if self.stats.iteration_complete:
+        if self.prog_stat.ant_move_state.is_active:
             time.sleep(self.settings.show_traveled_roads_delay)
-        else:
+        elif self.prog_stat.show_results_state.is_active:
             time.sleep(self.settings.ant_move_delay)
 
     def _search_for_best_way(self):
