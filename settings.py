@@ -49,3 +49,5 @@ class Settings:
         # Start button
         self.start_button_number = 0
         self.start_button_text = "Start"
+
+

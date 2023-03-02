@@ -20,6 +20,7 @@ class ProgramMenu:
         pygame.draw.rect(self.screen, self.settings.menu_color, self.rect)
 
     def draw_start_button(self):
+        """Draw start button"""
         start_button = Button(self.ac_prog, self.settings.start_button_text,
                               self.settings.start_button_number)
         start_button.draw_button()

@@ -60,20 +60,31 @@ class AntColony:
 
     def _create_cities(self):
         """Creates all cities"""
-        for city_number in range(self.settings.city_number):
-            city = City(self)
-            while True:
-                city.rect.x = randrange(self.settings.screen_left_border,
-                                        self.settings.screen_width - self.settings.screen_border)
-                city.rect.y = randrange(self.settings.screen_border,
-                                        self.settings.screen_height - self.settings.screen_border)
-                if self._check_is_city_near(city):
-                    # Have to random new position
-                    pass
+        create_cities_not_compleat = True
+        while create_cities_not_compleat:
+            for city_number in range(self.settings.city_number):
+                city = City(self)
+                create_success = False
+                for number in range(10):
+                    city.rect.x = randrange(self.settings.screen_left_border,
+                                            self.settings.screen_width - self.settings.screen_border)
+                    city.rect.y = randrange(self.settings.screen_border,
+                                            self.settings.screen_height - self.settings.screen_border)
+                    if self._check_is_city_near(city):
+                        # Have to random new position
+                        pass
+                    else:
+                        create_success = True
+                        break
+                if create_success:
+                    self.cities.add(city)
                 else:
+                    # Empty cities list and start creating from beginning
+                    self.cities.empty()
                     break
+            if len(self.cities) == self.settings.city_number:
+                break
 
-            self.cities.add(city)
 
     def _check_is_city_near(self, new_city):
         """Check is any other city inside city border"""
