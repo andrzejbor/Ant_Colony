@@ -43,5 +43,9 @@ class Settings:
         self.button_high = 50
         self.button_color = (0, 255, 0)
         self.button_text_color = (255, 255, 255)
+        self.distance_from_left = 25
+        self.distance_between_buttons = 30
 
-
+        # Start button
+        self.start_button_number = 0
+        self.start_button_text = "Start"

@@ -1,4 +1,5 @@
 import pygame
+from button import Button
 
 
 class ProgramMenu:
@@ -18,6 +19,12 @@ class ProgramMenu:
 
         pygame.draw.rect(self.screen, self.settings.menu_color, self.rect)
 
+    def draw_start_button(self):
+        start_button = Button(self.ac_prog, self.settings.start_button_text,
+                              self.settings.start_button_number)
+        start_button.draw_button()
+
     def display_menu(self):
         """Display all manu element on screen"""
         self.draw_menu_rect()
+        self.draw_start_button()

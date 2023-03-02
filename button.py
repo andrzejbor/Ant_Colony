@@ -1,9 +1,10 @@
 import pygame.font
 
+
 class Button:
     """Class for create buttons"""
 
-    def __init__(self, ac_prog, top_left_pos, button_text):
+    def __init__(self, ac_prog, button_text, button_number):
         """Initialization button attribute"""
         self.ac_prog = ac_prog
         self.screen = self.ac_prog.screen
@@ -19,16 +20,21 @@ class Button:
 
         # Create button rect and put it in proper place
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        self.rect.topleft = top_left_pos
+        self.rect.topleft = self._calculate_position(button_number)
 
-        self.text = button_text
+        self._prep_text(button_text)
 
-    def _prep_text(self):
+    def _prep_text(self, text):
         """Convert button text to image and put it in center"""
-        self.text_image = self.font.render(self.text, True, self.text_color,
+        self.text_image = self.font.render(text, True, self.text_color,
                                            self.button_color)
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.center = self.rect.center
+
+    def _calculate_position(self, number):
+        button_top = self.settings.distance_between_buttons + number * \
+                     (self.settings.distance_between_buttons + self.settings.button_high)
+        return self.settings.distance_from_left, button_top
 
     def draw_button(self):
         """Display button on the screen"""
