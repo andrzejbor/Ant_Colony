@@ -11,6 +11,7 @@ from show_results import ShowResults
 from state_machine import ProgramState
 from program_menu import ProgramMenu
 from button_events import ButtonEvents
+from brute_force import BruteForce
 
 
 class AntColony:
@@ -49,6 +50,9 @@ class AntColony:
             self._update_roads_and_ants()
             self._update_screen()
             self._program_sleep()
+
+            bf = BruteForce(self)
+            bf.find_best_way_brute_force()
 
     def _check_events(self):
         """Reaction for mouse and keyboard events"""
