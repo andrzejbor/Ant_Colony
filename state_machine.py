@@ -20,5 +20,6 @@ class ProgramState(StateMachine):
     # Pause transitions
     from_ant_to_pause = ant_move_state.to(pause_state)
     from_show_to_pause = show_results_state.to(pause_state)
+    from_end_to_pause = end_program_state.to(pause_state)
     # End program transitions
     switch_to_end = show_results_state.to(end_program_state)

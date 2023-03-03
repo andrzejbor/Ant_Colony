@@ -17,7 +17,9 @@ class ButtonEvents:
         """Reset cities, roads and result. Change state to pause"""
         if self.prog_stat.initial_state.is_active:
             pass
-        elif self.prog_stat.ant_move_state.is_active or self.prog_stat.show_results_state.is_active:
+        elif self.prog_stat.ant_move_state.is_active \
+                or self.prog_stat.show_results_state.is_active \
+                or self.prog_stat.end_program_state.is_active:
             # Delete old cities, roads and ants
             ac_prog.cities.empty()
             ac_prog.roads.empty()
@@ -34,8 +36,10 @@ class ButtonEvents:
 
             if self.prog_stat.current_state.id == "ant_move_state":
                 self.prog_stat.from_ant_to_pause()
-            else:
+            elif self.prog_stat.current_state.id == "show_results_state":
                 self.prog_stat.from_show_to_pause()
+            elif self.prog_stat.current_state.id == "end_program_state":
+                self.prog_stat.from_end_to_pause()
 
     def click_speedup_button(self):
         """Change delay for shorter version"""
