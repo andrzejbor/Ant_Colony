@@ -68,3 +68,10 @@ class Settings:
         # Slow version button
         self.slowdown_button_number = 3
         self.slowdown_button_text = "Slow"
+
+        # Brute force button
+        self.bruteforce_button_number = 4
+        self.bruteforce_button_text = "BF"
+
+        # Brute force result "button"
+        self.bf_result_number = 5

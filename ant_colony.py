@@ -51,9 +51,6 @@ class AntColony:
             self._update_screen()
             self._program_sleep()
 
-            bf = BruteForce(self)
-            bf.find_best_way_brute_force()
-
     def _check_events(self):
         """Reaction for mouse and keyboard events"""
         for event in pygame.event.get():
@@ -76,6 +73,8 @@ class AntColony:
             self.bt_events.click_speedup_button()
         elif self.prog_menu.slowdown_button.rect.collidepoint(mouse_pos):
             self.bt_events.click_slowdown_button()
+        elif self.prog_menu.brute_force_button.rect.collidepoint(mouse_pos):
+            self.bt_events.click_brute_force_button()
 
     def _create_cities(self):
         """Creates all cities"""

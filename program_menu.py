@@ -43,6 +43,18 @@ class ProgramMenu:
                                       self.settings.slowdown_button_number)
         self.slowdown_button.draw_button()
 
+    def draw_brute_force_button(self):
+        """Draw brute force button"""
+        self.brute_force_button = Button(self.ac_prog, self.settings.bruteforce_button_text,
+                                         self.settings.bruteforce_button_number)
+        self.brute_force_button.draw_button()
+
+    def draw_brute_force_result(self):
+        """Draw brute force result 'button' """
+        self.brute_force_result = Button(self.ac_prog, str(self.ac_prog.stats.brute_force_result),
+                                         self.settings.bf_result_number)
+        self.brute_force_result.draw_button()
+
     def display_menu(self):
         """Display all manu element on screen"""
         self.draw_menu_rect()
@@ -50,3 +62,7 @@ class ProgramMenu:
         self.draw_restart_button()
         self.draw_speedup_button()
         self.draw_slowdown_button()
+        if self.ac_prog.prog_stat.end_program_state.is_active:
+            self.draw_brute_force_button()
+        if self.ac_prog.stats.show_brute_force_result:
+            self.draw_brute_force_result()

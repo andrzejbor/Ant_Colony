@@ -48,8 +48,6 @@ class BruteForce:
             if self.best_way == 0 or self.best_way > sum_length:
                 self.best_way = sum_length
 
-
-
     def find_best_way_brute_force(self):
         """Run brute force algorithm"""
         self.current_city = self.stats.start_city
@@ -57,5 +55,3 @@ class BruteForce:
 
         for city in self.cities_to_visit:
             self._summary_way_length(city, 0, self.roads)
-
-        print(self.best_way)

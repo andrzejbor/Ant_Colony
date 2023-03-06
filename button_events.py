@@ -50,3 +50,7 @@ class ButtonEvents:
         """Change delay for long version"""
         self.settings.ant_move_delay = self.settings.ant_move_delay_long
         self.settings.show_traveled_roads_delay = self.settings.show_traveled_roads_delay_long
+
+    def click_brute_force_button(self):
+        """Run brute force algorithm and show result"""
+        self.ac_prog.stats.show_brute_force_result = True
