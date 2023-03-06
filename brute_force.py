@@ -4,7 +4,7 @@ class BruteForce:
     def __init__(self, ac_prog):
         self.ac_prog = ac_prog
         self.stats = self.ac_prog.stats
-        self.cities_to_visit = self.ac_prog.cities
+        self.cities_to_visit = self.ac_prog.cities.copy()
         self.roads = self.ac_prog.roads
         self.best_way = 0
 
@@ -20,12 +20,12 @@ class BruteForce:
     def _find_city_at_end_of_road(self, road, city):
         """Find second city in selected road"""
         if road.pos_1 == city.rect.center:
-            second_city_pos = road.pos_1
-        else:
             second_city_pos = road.pos_2
-        for city in self.ac_prog.cities:
-            if city.rect.center == second_city_pos:
-                return city
+        else:
+            second_city_pos = road.pos_1
+        for possible_city in self.ac_prog.cities:
+            if possible_city.rect.center == second_city_pos:
+                return possible_city
 
     def _get_selected_road_length(self, city, next_city, roads):
         """Find selected road and return it length"""
@@ -43,6 +43,7 @@ class BruteForce:
                 all_roads_copy.remove(road)
             for road in possible_roads:
                 next_city = self._find_city_at_end_of_road(road, city)
+                print(f"sum = {sum_length}, road = {road.road_length}")
                 self._summary_way_length(next_city, sum_length + road.road_length, all_roads_copy)
         else:
             if self.best_way == 0 or self.best_way > sum_length:

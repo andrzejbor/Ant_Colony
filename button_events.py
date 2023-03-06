@@ -1,3 +1,4 @@
+from brute_force import BruteForce
 class ButtonEvents:
     """Class for storage logic of button events"""
 
@@ -5,6 +6,7 @@ class ButtonEvents:
         self.ac_prog = ac_prog
         self.prog_stat = self.ac_prog.prog_stat
         self.settings = self.ac_prog.settings
+        self.stats = self.ac_prog.stats
 
     def click_start_button(self):
         """Start program if no started"""
@@ -53,4 +55,8 @@ class ButtonEvents:
 
     def click_brute_force_button(self):
         """Run brute force algorithm and show result"""
+        bf = BruteForce(self.ac_prog)
+        bf.find_best_way_brute_force()
+        self.stats.brute_force_result = bf.best_way
+        print(bf.best_way)
         self.ac_prog.stats.show_brute_force_result = True
