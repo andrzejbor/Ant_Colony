@@ -17,6 +17,7 @@ class Road(Sprite):
         self.pos_1 = city_1.rect.center
         self.pos_2 = city_2.rect.center
         self.road_length = self._calculate_road_length(self.pos_1, self.pos_2)
+        self.ant_pheromone = 0
 
     def _calculate_road_length(self, pos_1, pos_2):
         """Calculate distance between two cities"""
@@ -46,6 +47,11 @@ class Road(Sprite):
         for possible_city in self.ac_prog.cities:
             if possible_city.rect.center == second_city_pos:
                 return possible_city
+
+    def add_ant_pheromone(self):
+        """Add pheromone. Quantity depend on road long (shorter get more)"""
+        self.ant_pheromone += int(((self.ac_prog.stats.road_limit - self.road_length)
+                               * self.settings.ant_pheromone_quantity_percent) / 100)
 
     def draw_brute_force_road(self):
         """Draw road for bruteforce algorithm"""

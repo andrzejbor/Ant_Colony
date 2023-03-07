@@ -33,6 +33,7 @@ class Ant(Sprite):
             self.journey_compleat = True
         last_road = self._find_last_road()
         last_road.mark_traveled_road()
+        last_road.add_ant_pheromone()
         self.traveled_roads.add(last_road)
         self.distance_traveled += last_road.road_length
 
@@ -45,10 +46,12 @@ class Ant(Sprite):
         return chosen_road.find_city_at_end_fo_road(self.current_position)
 
     def _fortune_wheel(self, roads):
-        """Choose city in fortune wheel (closer city has bigger chance)"""
+        """Choose city in fortune wheel (shorter road and road with pheromone has bigger chance)"""
         fortune_wheel = []
         for road in roads:
             for number in range(self.ac_prog.stats.road_limit - road.road_length):
+                fortune_wheel.append(road)
+            for number in range(road.ant_pheromone):
                 fortune_wheel.append(road)
         return fortune_wheel[randrange(len(fortune_wheel))]
 

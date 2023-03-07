@@ -15,10 +15,10 @@ class Settings:
         self.screen_left_border = 200
 
         # City settings
-        self.city_number = 6
+        self.city_number = 7
         self.city_color = (0, 0, 0)
         self.city_size = 20
-        self.city_border = 100
+        self.city_border = 50
         self.start_city_color = (250, 250, 0)
 
         # Road settings
@@ -31,6 +31,8 @@ class Settings:
         self.ant_limit = 5
         self.ant_road_color = (0, 0, 250)
         self.ant_road_width = 4
+        self.ant_pheromone_quantity_percent = 20
+        self.ant_pheromone_evaporation_percent = 30
 
         # Time settings
         self.ant_move_delay = 0.5
@@ -41,7 +43,7 @@ class Settings:
         self.show_traveled_roads_delay_short = 0.3
 
         # Program end settings
-        self.iteration_without_better_result_limit = 2
+        self.iteration_without_better_result_limit = 10
 
         # Menu settings
         self.menu_width = 200
