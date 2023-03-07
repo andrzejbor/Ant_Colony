@@ -9,6 +9,7 @@ class Road(Sprite):
     def __init__(self, ac_prog, city_1, city_2):
         """Initialization road and calculate it length"""
         super().__init__()
+        self.ac_prog = ac_prog
         self.screen = ac_prog.screen
         self.settings = ac_prog.settings
         self.color = self.settings.road_color
@@ -35,6 +36,16 @@ class Road(Sprite):
     def draw_road(self):
         """Display road on the screen"""
         pygame.draw.line(self.screen, self.color, self.pos_1, self.pos_2, self.width)
+
+    def find_city_at_end_fo_road(self, city):
+        """Find city at the other end of road then provided city"""
+        if self.pos_1 == city.rect.center:
+            second_city_pos = self.pos_2
+        else:
+            second_city_pos = self.pos_1
+        for possible_city in self.ac_prog.cities:
+            if possible_city.rect.center == second_city_pos:
+                return possible_city
 
     def draw_brute_force_road(self):
         """Draw road for bruteforce algorithm"""

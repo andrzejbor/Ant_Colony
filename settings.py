@@ -15,7 +15,7 @@ class Settings:
         self.screen_left_border = 200
 
         # City settings
-        self.city_number = 5
+        self.city_number = 6
         self.city_color = (0, 0, 0)
         self.city_size = 20
         self.city_border = 100

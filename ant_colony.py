@@ -122,10 +122,19 @@ class AntColony:
                     road = Road(self, city, city_copy)
                     self.roads.add(road)
             cities_copy.remove(city)
+        self._fill_roads_statistic()
 
     def _check_cities_position(self, city_1, city_2):
         """Check if two cities is in the same position"""
         return city_1.rect.center == city_2.rect.center
+
+    def _fill_roads_statistic(self):
+        """Fill roads statistic after create roads"""
+        max_road_length = 0
+        for road in self.roads:
+            if road.road_length > max_road_length:
+                max_road_length = road.road_length
+        self.stats.road_limit = int(1.5 * max_road_length)
 
     def _choose_start_city(self):
         """Draw random city as start"""

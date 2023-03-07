@@ -19,3 +19,5 @@ class ProgStats:
         self.brute_force_result = 0
         self.brute_force_way = []
         self.show_brute_force_result = False
+        # value = 1,5 max road length
+        self.road_limit = 0
