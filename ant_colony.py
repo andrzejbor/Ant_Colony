@@ -187,8 +187,8 @@ class AntColony:
             if self._check_end_program_condition():
                 pass
             else:
+                self._update_pheromone()
                 self._reset_ants_for_next_iteration()
-                self._evaporation_pheromone()
                 self.prog_stat.switch_to_ant_move()
 
     def _reset_ants_for_next_iteration(self):
@@ -198,10 +198,13 @@ class AntColony:
         self.ants.empty()
         self._create_ants()
 
-    def _evaporation_pheromone(self):
+    def _update_pheromone(self):
         """Evaporate pheromone from roads after ant iteration"""
+        for ant in self.ants:
+            for road in ant.traveled_roads:
+                road.add_ant_pheromone()
         for road in self.roads:
-            road.ant_pheromone = int(road.ant_pheromone * self.settings.ant_pheromone_evaporation_percent / 100)
+            road.evaporation_pheromone()
 
     def _program_sleep(self):
         """Manage pause time for better showing result"""

@@ -33,7 +33,6 @@ class Ant(Sprite):
             self.journey_compleat = True
         last_road = self._find_last_road()
         last_road.mark_traveled_road()
-        last_road.add_ant_pheromone()
         self.traveled_roads.add(last_road)
         self.distance_traveled += last_road.road_length
 

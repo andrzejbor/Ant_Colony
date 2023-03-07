@@ -51,7 +51,11 @@ class Road(Sprite):
     def add_ant_pheromone(self):
         """Add pheromone. Quantity depend on road long (shorter get more)"""
         self.ant_pheromone += int(((self.ac_prog.stats.road_limit - self.road_length)
-                               * self.settings.ant_pheromone_quantity_percent) / 100)
+                                   * self.settings.ant_pheromone_quantity_percent) / 100)
+
+    def evaporation_pheromone(self):
+        """Evaporate pheromone from roads after ant iteration"""
+        self.ant_pheromone = int(self.ant_pheromone * self.settings.ant_pheromone_evaporation_percent / 100)
 
     def draw_brute_force_road(self):
         """Draw road for bruteforce algorithm"""
