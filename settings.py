@@ -24,6 +24,8 @@ class Settings:
         # Road settings
         self.road_color = (250, 0, 0)
         self.road_width = 2
+        self.brute_force_color = (0, 255, 0)
+        self.brute_force_width = 8
 
         # Ant settings
         self.ant_limit = 5

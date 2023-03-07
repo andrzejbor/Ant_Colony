@@ -1,4 +1,6 @@
 from brute_force import BruteForce
+
+
 class ButtonEvents:
     """Class for storage logic of button events"""
 
@@ -57,6 +59,5 @@ class ButtonEvents:
         """Run brute force algorithm and show result"""
         bf = BruteForce(self.ac_prog)
         bf.find_best_way_brute_force()
-        self.stats.brute_force_result = bf.best_way
-        print(bf.best_way)
+        self.stats.brute_force_result = bf.best_way_length
         self.ac_prog.stats.show_brute_force_result = True

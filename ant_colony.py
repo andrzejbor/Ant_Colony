@@ -240,7 +240,10 @@ class AntColony:
         self.screen.fill(self.settings.bg_color)
 
         if not self.prog_stat.initial_state.is_active:
-            # Draw roads, cities and best result
+            # Draw roads, cities, best result and brute force result if active
+            if self.stats.show_brute_force_result:
+                for road in self.stats.brute_force_way:
+                    road.draw_brute_force_road()
             for road in self.roads:
                 road.draw_road()
             for city in self.cities:

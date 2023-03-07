@@ -34,5 +34,9 @@ class Road(Sprite):
 
     def draw_road(self):
         """Display road on the screen"""
-
         pygame.draw.line(self.screen, self.color, self.pos_1, self.pos_2, self.width)
+
+    def draw_brute_force_road(self):
+        """Draw road for bruteforce algorithm"""
+        pygame.draw.line(self.screen, self.settings.brute_force_color, self.pos_1, self.pos_2,
+                         self.settings.brute_force_width)

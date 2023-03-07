@@ -17,4 +17,5 @@ class ProgStats:
         self.iteration_complete = False
         self.iteration_without_better_result = 0
         self.brute_force_result = 0
+        self.brute_force_way = []
         self.show_brute_force_result = False
